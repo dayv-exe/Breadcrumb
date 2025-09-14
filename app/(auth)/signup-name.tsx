@@ -112,7 +112,7 @@ export default function SignupNameScreen() {
 
   function getFullNameFeedback(): { text: string, mode: inputMode } {
     if (userDetails.fullname && userDetails.fullname.length > MAX_FULLNAME_LEN) {
-      return { text: `cannot be greater than ${MAX_FULLNAME_LEN} characters`, mode: "warn" }
+      return { text: `🚫 cannot be greater than ${MAX_FULLNAME_LEN} characters`, mode: "warn" }
     }
 
     if (emojiRegex.test(userDetails.fullname ?? "")) {

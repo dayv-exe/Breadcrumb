@@ -5,8 +5,8 @@ import CustomView from "@/components/views/CustomView";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useState } from "react";
-import { Image, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Image, StyleSheet, TextInput, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 const icons = {
@@ -50,7 +50,6 @@ export default function SearchScreen() {
   return (
     <CustomView adaptToTheme horizontalPadding={10}>
       <SafeAreaView style={{
-        marginTop: inset.top,
         width: '100%'
       }}>
         <Spacer size="small" />

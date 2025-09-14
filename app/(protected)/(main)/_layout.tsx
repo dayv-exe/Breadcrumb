@@ -151,7 +151,7 @@ export default function MainScreen() {
       headerShown: false,
       tabBarStyle: {
         backgroundColor: isDarkMode ? Colors.dark.background : Colors.light.background,
-        height: 95,
+        height: 90,
         paddingTop: 14,
         borderColor: isAddActive() || isMapActive() ? "transparent" : isDarkMode ? "#444" : "#ccc",
       },
