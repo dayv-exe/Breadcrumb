@@ -6,7 +6,6 @@ import Constants from "expo-constants";
 import * as Location from "expo-location";
 import { useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import CustomLabel from "../CustomLabel";
 import CustomButton from "../buttons/CustomButton";
 
@@ -54,7 +53,6 @@ export default function CustomMap({ handlePress = () => { }, handleLongPress = (
   const cameraRef = useRef<Mapbox.Camera>(null)
   const [location, setLocation] = useState<Location.LocationObject | null>(null)
   const [permissionGranted, setPermissionGranted] = useState(false)
-  const inset = useSafeAreaInsets()
 
   const [mapReady, setMapReady] = useState(false);
 

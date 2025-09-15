@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.vibrantBackground,
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingHorizontal: 40,
     width: "100%"
   },
 })

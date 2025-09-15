@@ -5,7 +5,6 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type CustomTabIconProps = {
   name: string;
@@ -53,7 +52,6 @@ function CustomTabLabel({ text, color, focused }: CustomTabLabelProps) {
 export default function CustomFloatingTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const mode = useColorScheme()
   const theme = useThemeColor
-  const insets = useSafeAreaInsets();
 
   const isDark = mode === 'dark';
   const backgroundColor = isDark ? Colors.dark.background : Colors.light.background;
@@ -97,7 +95,7 @@ export default function CustomFloatingTabBar({ state, descriptors, navigation }:
   const isCreateFocused = state.routes[state.index]?.name === 'add';
 
   return (
-    <View style={[styles.container, { paddingBottom: insets.bottom }]}>
+    <View style={[styles.container, ]}>
       {/* Main Tab Bar */}
       <View
         style={[

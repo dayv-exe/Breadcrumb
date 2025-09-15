@@ -8,7 +8,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { debounce } from "@/utils/debounce";
 import { useEffect, useMemo, useState } from "react";
 import { Image, StyleSheet, TextInput, View } from "react-native";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const icons = {
@@ -28,7 +28,6 @@ export default function SearchScreen() {
   const [searchStr, setSearchStr] = useState("")
   const mode = useColorScheme()
   const theme = useThemeColor
-  const inset = useSafeAreaInsets()
   const searchOptions = ["People & walls", "Places"]
   const [searchFilter, setSearchFilter] = useState("")
   const getPlaceholderText = () => {

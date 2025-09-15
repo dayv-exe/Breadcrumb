@@ -11,7 +11,7 @@ import Constants from "expo-constants";
 import { useRouter } from "expo-router";
 import { useMemo, useRef, useState } from "react";
 import { StyleSheet, Text, useColorScheme, View } from "react-native";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const token = Constants.expoConfig?.extra?.mapboxToken;
 if (!token) {
@@ -52,7 +52,6 @@ export default function MapScreen() {
   const mapRef = useRef<Mapbox.MapView>(null);
   const [mapMethods, setMapMethods] = useState<mapMethods | null>(null)
   const [useSatellite, setUseSatellite] = useState(false)
-  const inset = useSafeAreaInsets()
   const isFocused = useIsFocused()
   const router = useRouter()
 
@@ -64,7 +63,7 @@ export default function MapScreen() {
   return (
     <View style={[styles.page, { backgroundColor: theme({}, "background") }]}>
 
-      <SafeAreaView style={[styles.headerWrapper, { marginTop: inset.top }]}>
+      <SafeAreaView style={[styles.headerWrapper]}>
         <View>
           <CustomImageButton src={getIconImage("addFriend", mode === "light")} handleClick={handleAddFriend} />
         </View>

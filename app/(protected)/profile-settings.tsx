@@ -11,7 +11,6 @@ import { useAuthStore } from "@/utils/authStore";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { SectionList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
 const icons = {
@@ -37,7 +36,6 @@ export default function ProfileSettingsScreen() {
   const theme = useThemeColor
   const mode = useColorScheme()
   const router = useRouter()
-  const inset = useSafeAreaInsets()
   const [popup, setPopup] = useState<{isVisible: boolean, text: string, priBtnText: string, secBtnText: string}>()
 
   const handleDeleteAccount = () => {
@@ -90,10 +88,9 @@ export default function ProfileSettingsScreen() {
 
   return (
     <CustomView horizontalPadding={0} adaptToTheme>
-      <SafeAreaView style={[
+      <View style={[
         styles.container,
       ]}>
-        <Spacer />
         <CustomProfilePictureCircle showInstruction />
         <Spacer />
         <SectionList
@@ -118,7 +115,7 @@ export default function ProfileSettingsScreen() {
             }]}>{title}</Text>
           )}
         />
-      </SafeAreaView>
+      </View>
     </CustomView>
   )
 }

@@ -147,7 +147,7 @@ export default function MainScreen() {
   const isDarkMode = mode === "dark" || isAddActive()  // to force navbar into dark mode when showing add screen with camera active because it looks better
 
   return (
-    <Tabs initialRouteName="search" screenOptions={{
+    <Tabs initialRouteName="add" screenOptions={{
       headerShown: false,
       tabBarStyle: {
         backgroundColor: isDarkMode ? Colors.dark.background : Colors.light.background,

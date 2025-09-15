@@ -6,9 +6,9 @@ import { useRouter } from "expo-router";
 import { PropsWithChildren, useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import Reanimated, { cancelAnimation, Easing, Extrapolation, interpolate, runOnJS, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import Reanimated, { cancelAnimation, Easing, Extrapolation, interpolate, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Camera, CameraDevice, CameraProps, useCameraDevice, useCameraFormat, useCameraPermission, useMicrophonePermission } from "react-native-vision-camera";
+import { scheduleOnRN } from "react-native-worklets";
 import CustomButton from "../buttons/CustomButton";
 import CustomImageButton from "../buttons/CustomImageButton";
 import CustomLabel from "../CustomLabel";
@@ -16,9 +16,6 @@ import RecordingIndicator from "../recordingIndicator";
 import Spacer from "../Spacer";
 import RecordingProgressRing from "./recordingProgressRing";
 
-Reanimated.addWhitelistedNativeProps({
-  zoom: true,
-})
 const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera)
 
 type camProps = {
@@ -61,7 +58,6 @@ function CameraScreen({ frontCam, backCam }: camProps) {
   const format = useCameraFormat(currentCam, [
     { photoResolution: { width: 1920, height: 1080 } }
   ])
-  const insets = useSafeAreaInsets()
 
   const router = useRouter()
 
@@ -91,7 +87,7 @@ function CameraScreen({ frontCam, backCam }: camProps) {
       )
     })
     .onEnd(() => {
-      runOnJS(handleTouchEnd)()
+      scheduleOnRN(handleTouchEnd)
     })
 
   const animatedProps = useAnimatedProps<CameraProps>(
@@ -110,7 +106,7 @@ function CameraScreen({ frontCam, backCam }: camProps) {
         easing: Easing.linear,
       },
       (finished) => {
-        runOnJS(stopRecording)()
+        scheduleOnRN(stopRecording)
       }
     )
   }
@@ -129,7 +125,7 @@ function CameraScreen({ frontCam, backCam }: camProps) {
 
   return (
     <GestureDetector gesture={gesture}>
-      <SafeAreaView style={styles.cameraContainer}>
+      <View style={[styles.cameraContainer, {paddingBottom: 0}]}>
         <View style={styles.cameraWrapper}>
           <ReanimatedCamera
             enableZoomGesture
@@ -153,7 +149,7 @@ function CameraScreen({ frontCam, backCam }: camProps) {
             <Spacer size="tiny" />
           </View>
         </View>}
-        {!isRecording && <View style={[styles.topControls, { paddingTop: insets.top }]}>
+        {!isRecording && <View style={[styles.topControls, {  }]}>
           <ControlButtonContainer>
             <CustomImageButton fitToContent type="text" src={require("../../assets/images/icons/searchfriends_sel_light.png")} size={22} handleClick={() => router.push("/find-friends")} />
           </ControlButtonContainer>
@@ -172,17 +168,17 @@ function CameraScreen({ frontCam, backCam }: camProps) {
           {isRecording && <RecordingProgressRing size={90} strokeWidth={10} progress={progress} />}
         </View>
         {!isRecording && <CrumbTypePicker />}
-      </SafeAreaView>
+      </View>
     </GestureDetector>
   )
 }
 
 function NoCameraFoundScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
       <CustomLabel textAlign="center" labelText="🤔" fontSize={21} />
       <CustomLabel width={"80%"} labelText="it appears that this device does not have a camera." textAlign="center" />
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -192,11 +188,11 @@ type noPermProps = {
 }
 function NoPermissionScreen({ missingPermissions, requestPerms }: noPermProps) {
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
+    <view style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
       <CustomLabel textAlign="center" labelText="🔐" fontSize={21} />
       <CustomLabel width={"80%"} labelText={`Allow ${missingPermissions.join(" and ")} access to start creating.`} textAlign="center" />
       <CustomButton type="less-vibrant-text" labelText="Grant Permissions" handleClick={requestPerms} />
-    </SafeAreaView>
+    </view>
   )
 }
 
@@ -295,7 +291,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    top: 20,
+    top: 15,
     paddingHorizontal: 20,
   },
   galleryContainer: {

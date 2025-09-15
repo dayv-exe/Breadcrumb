@@ -6,7 +6,6 @@ import * as Contacts from "expo-contacts";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ListRenderItem, StyleSheet, useColorScheme, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const icons = {
   next: {
@@ -40,7 +39,7 @@ const renderContact: ListRenderItem<Contacts.Contact> = ({ item }) => (
     }}>
       <CustomLabel
         labelText={item.name ?? "Unnamed Contact"}
-        key={`${item.id}-${item.name}`}
+        key={`${item.phoneNumbers}-${item.name}`}
         width="auto"
         adaptToTheme
       />
@@ -54,7 +53,6 @@ const renderContact: ListRenderItem<Contacts.Contact> = ({ item }) => (
 );
 
 export default function FindFriendsScreen() {
-  const insets = useSafeAreaInsets()
   const mode = useColorScheme()
   const router = useRouter()
   const [contacts, setContacts] = useState<Contacts.Contact[]>()

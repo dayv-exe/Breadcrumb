@@ -2,6 +2,7 @@ import axiosInstance from '../constants/axios';
 import { userSearchDetails } from './models/userSearchDetails';
 
 export const searchUser = async (searchString: string): Promise<{ result: userSearchDetails[], reason: string }> => {
+  searchString = searchString.toLowerCase()
   try {
     const { data } = await axiosInstance.get<{ message: userSearchDetails[] }>(`/search/${searchString}`);
     return { result: data.message, reason: "" }

@@ -11,8 +11,8 @@ import { useGetUserDetails } from "@/hooks/queries/useGetUserDetails";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Platform, StyleSheet, View } from "react-native";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
 const icons = {
@@ -36,7 +36,6 @@ export function getIconImage(name: keyof typeof icons, darkMode: boolean) {
 }
 
 export default function ProfileScreen() {
-  const inset = useSafeAreaInsets()
   const mode = useColorScheme()
   const router = useRouter()
   const handleShowOptions = () => {
@@ -98,9 +97,6 @@ export default function ProfileScreen() {
     <CustomView horizontalPadding={0} adaptToTheme>
       <SafeAreaView style={[
         styles.container,
-        {
-          marginTop: inset.top + (Platform.OS === "android" ? 10 : 0),
-        }
       ]}>
         <View style={styles.header}>
           <CustomLabel fitContent adaptToTheme bold labelText={getNickname()} />
