@@ -2,9 +2,11 @@ import CustomSelector from "@/components/buttons/CustomSelector";
 import Spacer from "@/components/Spacer";
 import CustomScrollView from "@/components/views/CustomScrollView";
 import CustomView from "@/components/views/CustomView";
+import { useSearchUserOnInputChange } from "@/hooks/queries/useSearchUser";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { useState } from "react";
+import { debounce } from "@/utils/debounce";
+import { useEffect, useMemo, useState } from "react";
 import { Image, StyleSheet, TextInput, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -36,6 +38,26 @@ export default function SearchScreen() {
     }
 
     return placeholderTexts[0]
+  }
+
+  const [debouncedSearchStr, setDebouncedSearchStr] = useState("")
+
+  const debounceInput = useMemo(() => {
+    return debounce((value: string) => {
+      setDebouncedSearchStr(value);
+    }, 1000);
+  }, []);
+  const {
+    data: searchResult,
+    isPending: searchResPending,
+    error: searchResultErr
+  } = useSearchUserOnInputChange(debouncedSearchStr)
+  useEffect(() => {
+    debounceInput(searchStr)
+  }, [searchStr])
+
+  if (searchResult) {
+    console.log(searchResult) 
   }
 
   function handleSearchOptSelect(selected: string) {

@@ -11,8 +11,8 @@ import { useGetUserDetails } from "@/hooks/queries/useGetUserDetails";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Platform, StyleSheet, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
 const icons = {

@@ -1,6 +1,6 @@
 import CustomLabel from "@/components/CustomLabel";
 import CustomView from "@/components/views/CustomView";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CreateWallScreen() {
   return (

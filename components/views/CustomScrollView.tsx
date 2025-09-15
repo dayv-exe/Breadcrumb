@@ -7,7 +7,7 @@ type props = {
 
 export default function CustomScrollView({ children, customStyle }: PropsWithChildren<props>) {
   return (
-    <ScrollView style={styles.scroll} contentContainerStyle={[styles.scrollContent, customStyle]} keyboardShouldPersistTaps="handled">
+    <ScrollView style={styles.scroll} contentContainerStyle={[styles.scrollContent, customStyle]} keyboardShouldPersistTaps="always">
       {children}
     </ScrollView>
   )

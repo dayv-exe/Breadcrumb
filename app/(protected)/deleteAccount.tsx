@@ -3,8 +3,8 @@ import CustomLabel from "@/components/CustomLabel";
 import Spacer from "@/components/Spacer";
 import CustomView from "@/components/views/CustomView";
 import { Colors } from "@/constants/Colors";
-import { Image, Platform, SafeAreaView, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Image, Platform, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function DeleteAccountScreen() {
   const inset = useSafeAreaInsets()

@@ -23,7 +23,7 @@ export default function CustomEmailSuggestion({ inputVal, setInputVal, useTheme 
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="handled"
+        keyboardShouldPersistTaps="always"
       >
         {
           SUGGESTED_EMAIL_DOMAINS.map(text => (

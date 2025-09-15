@@ -35,7 +35,7 @@ export default function CustomSelector({ options, borderRadius = 15, onSelect, d
     <ScrollView horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.container}
-      keyboardShouldPersistTaps>
+      keyboardShouldPersistTaps="always">
       {options.map(option => (
         <View key={option} style={{ flexDirection: "row" }}>
           <CustomButton borderRadius={borderRadius} imgSize={13} imgSrc={sel === option ? getIconImage("check", mode === "light") : ""} adaptToTheme squashed type="theme-faded" labelText={option} handleClick={() => handleSel(option)} />

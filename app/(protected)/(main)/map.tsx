@@ -10,8 +10,8 @@ import Mapbox from "@rnmapbox/maps";
 import Constants from "expo-constants";
 import { useRouter } from "expo-router";
 import { useMemo, useRef, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, useColorScheme, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { StyleSheet, Text, useColorScheme, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 const token = Constants.expoConfig?.extra?.mapboxToken;
 if (!token) {

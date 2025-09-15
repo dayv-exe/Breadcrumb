@@ -10,8 +10,8 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { useAuthStore } from "@/utils/authStore";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SectionList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
 const icons = {
