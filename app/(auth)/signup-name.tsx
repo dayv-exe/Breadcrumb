@@ -11,7 +11,7 @@ import { emojiRegex } from "@/constants/regexes";
 import { useUsernameAvailableOnInputChange, useUsernameAvailableOnSubmit } from "@/hooks/queries/useUsernameAvailable";
 import { debounce } from "@/utils/debounce";
 import { useRouter } from "expo-router";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function SignupNameScreen() {
@@ -34,11 +34,6 @@ export default function SignupNameScreen() {
     }, 500);
   }, []);
 
-  useEffect(() => {
-    debounceInput(userDetails.username)
-  }, [userDetails.username])
-
-
   const {
     data,
     isPending,
@@ -46,6 +41,7 @@ export default function SignupNameScreen() {
   } = useUsernameAvailableOnInputChange(debouncedUname)
 
   const handleUsernameChange = (e: string) => {
+    debounceInput(e)
     setUserDetails({ ...userDetails, username: e })
   }
 

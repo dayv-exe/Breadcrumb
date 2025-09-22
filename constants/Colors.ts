@@ -18,7 +18,7 @@ export const Colors = {
     fadedVibrant: "rgba(112, 112, 238, .1)"
   },
   dark: {
-    text: 'rgba(255, 255, 255, .9)',
+    text: 'rgba(255, 255, 255, 1)',
     background: '#0f0f0f',
     tint: tintColorDark,
     icon: '#9BA1A6',

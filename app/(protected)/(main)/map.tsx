@@ -48,7 +48,7 @@ export default function MapScreen() {
   const mode = useColorScheme() ?? "light";
   const theme = useThemeColor
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['7%', '15', '25%', '35%'], []);
+  const snapPoints = useMemo(() => ['7%', '15', '25%', '35%', '80%'], []);
   const mapRef = useRef<Mapbox.MapView>(null);
   const [mapMethods, setMapMethods] = useState<mapMethods | null>(null)
   const [useSatellite, setUseSatellite] = useState(false)
@@ -81,19 +81,20 @@ export default function MapScreen() {
         </View>
       </SafeAreaView>
 
-      {isFocused && <CustomMap setMapMethods={setMapMethods} mapRef={mapRef} zoomLevel={12.5} useSatellite={useSatellite} />}
+      {(true || isFocused) && <CustomMap setMapMethods={setMapMethods} mapRef={mapRef} zoomLevel={12.5} useSatellite={useSatellite} />}
 
       <BottomSheet
         ref={bottomSheetRef}
         index={0}
         snapPoints={snapPoints}
         enablePanDownToClose={false}
+        containerStyle={{ zIndex: 20 }}
         backgroundStyle={[styles.bottomSheet, {
-          backgroundColor: mode === "dark" ? Colors.dark.background : Colors.light.background
+          backgroundColor: mode === "dark" ? Colors.dark.background : Colors.light.background,
         }]}
         handleIndicatorStyle={{ backgroundColor: mode === "dark" ? Colors.dark.text : Colors.light.text }}
       >
-        <BottomSheetView style={{ paddingHorizontal: 30, paddingVertical: 10, }}>
+        <BottomSheetView style={{ paddingHorizontal: 30, paddingVertical: 10 }}>
           <CustomLabel labelText="crumbs" adaptToTheme />
           <CustomLabel labelText="crumbs you received or sent will show here" adaptToTheme fade />
           <Spacer size="big" />
@@ -130,15 +131,16 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: .275,
     shadowRadius: 10,
+    zIndex: 10
   },
   page: {
     flex: 1,
   },
   bottomSheet: {
-    borderTopLeftRadius: "7%",
-    borderTopRightRadius: "7%",
+    borderTopLeftRadius: 35,
+    borderTopRightRadius: 35,
     shadowRadius: 10,
     shadowOpacity: .25,
-    elevation: 5
+    elevation: 5,
   }
 });

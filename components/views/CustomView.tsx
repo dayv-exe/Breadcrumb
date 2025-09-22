@@ -1,7 +1,7 @@
 import { Colors } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { PropsWithChildren } from "react";
-import { DimensionValue, StyleSheet, View } from "react-native";
+import { DimensionValue, Keyboard, StyleSheet, View } from "react-native";
 
 type cvProps = {
   backgroundColor?: string
@@ -21,7 +21,7 @@ export default function CustomView({ children, backgroundColor = "#FFF", vertica
         justifyContent: verticalAlign,
         paddingHorizontal: horizontalPadding
       }
-    ]}>
+    ]} onTouchStart={Keyboard.dismiss}>
       {children}
     </View>
   )

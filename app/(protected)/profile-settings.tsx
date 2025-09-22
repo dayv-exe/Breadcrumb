@@ -115,6 +115,7 @@ export default function ProfileSettingsScreen() {
             }]}>{title}</Text>
           )}
         />
+        <Spacer />
       </View>
     </CustomView>
   )

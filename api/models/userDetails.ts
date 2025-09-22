@@ -17,8 +17,7 @@ export interface UserDetails {
   birthdate: string | null;
   birthdateChangeCount: number | null;
   dateJoined: string | null;
-  defaultPicBg: string | null;
-  defaultPicFg: string | null;
+  defaultPicColors: string | null;
   dpUrl: string | null;
   email: string | null;
   forceChangeNickname: boolean | null;
@@ -31,4 +30,5 @@ export interface UserDetails {
   nickname: string | null;
   suspensionReason: string | null;
   userId: string | null;
+  friends: string | null;
 }

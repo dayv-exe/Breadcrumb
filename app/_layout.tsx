@@ -1,3 +1,4 @@
+import { useColorScheme } from '@/hooks/useColorScheme.web';
 import { useAuthStore } from '@/utils/authStore';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Amplify } from "aws-amplify";
@@ -65,8 +66,65 @@ const toastConfig = {
   }
 }
 
+const darkToastConfig = {
+  info: (props: ToastProps) => {
+    return (
+      <BaseToast
+        {...props}
+        style={{
+          backgroundColor: "#333",
+          borderRadius: 15,
+          borderLeftWidth: 0,
+          borderLeftColor: 'transparent',
+          marginTop: props.position === "top" ? 20 : 0
+        }}
+        contentContainerStyle={{ padding: 15 }}
+        text1Style={{
+          fontSize: 16,
+          color: "#fff",
+          fontWeight: "normal",
+          overflow: "visible",
+          wordWrap: "none"
+        }}
+        text2Style={{
+          fontSize: 16,
+          color: "#fff",
+        }}
+      />
+    )
+  },
+
+  warn: (props: ToastProps) => {
+    return (
+      <BaseToast
+        {...props}
+        style={{
+          backgroundColor: "#fff",
+          borderRadius: 15,
+          borderLeftWidth: 0,
+          borderLeftColor: 'transparent',
+          marginTop: props.position === "top" ? 20 : 0
+        }}
+        contentContainerStyle={{ padding: 15 }}
+        text1Style={{
+          fontSize: 16,
+          color: "red",
+          fontWeight: "normal",
+          overflow: "visible",
+          wordWrap: "none"
+        }}
+        text2Style={{
+          fontSize: 16,
+          color: "red",
+        }}
+      />
+    )
+  }
+}
+
 export default function RootLayout() {
   const { isLoggedIn, checkAuthStatus } = useAuthStore()
+  const mode = useColorScheme()
 
   useEffect(() => {
     checkAuthStatus()
@@ -83,7 +141,7 @@ export default function RootLayout() {
   })
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
         <Stack screenOptions={{
           headerShown: false,
@@ -97,7 +155,7 @@ export default function RootLayout() {
           </Stack.Protected>
 
         </Stack>
-        <Toast config={toastConfig} />
+        <Toast config={mode === "light" ? darkToastConfig : toastConfig} />
       </QueryClientProvider>
     </GestureHandlerRootView>
   )

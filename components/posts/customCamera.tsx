@@ -188,11 +188,11 @@ type noPermProps = {
 }
 function NoPermissionScreen({ missingPermissions, requestPerms }: noPermProps) {
   return (
-    <view style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
       <CustomLabel textAlign="center" labelText="🔐" fontSize={21} />
       <CustomLabel width={"80%"} labelText={`Allow ${missingPermissions.join(" and ")} access to start creating.`} textAlign="center" />
       <CustomButton type="less-vibrant-text" labelText="Grant Permissions" handleClick={requestPerms} />
-    </view>
+    </View>
   )
 }
 

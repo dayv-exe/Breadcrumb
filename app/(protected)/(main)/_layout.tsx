@@ -15,6 +15,16 @@ const icons = {
       unselected: require("../../../assets/images/icons/map_unsel_light.png")
     }
   },
+  notifications: {
+    light: {
+      selected: require("../../../assets/images/icons/notifications_sel_dark.png"),
+      unselected: require("../../../assets/images/icons/notifications_unsel_dark.png")
+    },
+    dark: {
+      selected: require("../../../assets/images/icons/notifications_sel_light.png"),
+      unselected: require("../../../assets/images/icons/notifications_unsel_light.png")
+    }
+  },
   crumbs: {
     light: {
       selected: require("../../../assets/images/icons/crumbs_sel_dark.png"),
@@ -23,16 +33,6 @@ const icons = {
     dark: {
       selected: require("../../../assets/images/icons/crumbs_sel_light.png"),
       unselected: require("../../../assets/images/icons/crumbs_unsel_light.png")
-    }
-  },
-  walls: {
-    light: {
-      selected: require("../../../assets/images/icons/walls_sel_dark.png"),
-      unselected: require("../../../assets/images/icons/walls_unsel_dark.png")
-    },
-    dark: {
-      selected: require("../../../assets/images/icons/walls_sel_light.png"),
-      unselected: require("../../../assets/images/icons/walls_unsel_light.png")
     }
   },
   search: {
@@ -196,6 +196,7 @@ export default function MainScreen() {
           <CustomTabLabel color={theme({}, "text")} text="Search" focused={focused} />
         )
       }} />
+
 
       <Tabs.Screen name="profile" options={{
         title: "Me",

@@ -3,4 +3,5 @@ export interface userSearchDetails {
   nickname: string
   name: string
   dpUrl: string
+  defaultPicColors: string | null;
 }

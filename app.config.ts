@@ -7,7 +7,7 @@ export default {
     version: "1.0.0",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
-    scheme: "breadcrumbrn",
+    scheme: "breadcrumb",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
     ios: {
@@ -20,7 +20,7 @@ export default {
         backgroundColor: "#ffffff",
       },
       edgeToEdgeEnabled: true,
-      package: "com.dayvexe.breadcrumbrn",
+      package: "com.dayvexe.breadcrumb",
     },
     web: {
       bundler: "metro",
@@ -65,6 +65,8 @@ export default {
         },
       ],
       "expo-secure-store",
+      "expo-font",
+      "expo-web-browser",
     ],
     experiments: {
       typedRoutes: true,

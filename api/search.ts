@@ -1,13 +1,24 @@
+import { AxiosError } from 'axios';
 import axiosInstance from '../constants/axios';
 import { userSearchDetails } from './models/userSearchDetails';
 
-export const searchUser = async (searchString: string): Promise<{ result: userSearchDetails[], reason: string }> => {
+export interface searchResponse {
+  results: userSearchDetails[] | null
+  error?: string
+}
+
+export const searchUser = async (searchString: string): Promise<searchResponse> => {
   searchString = searchString.toLowerCase()
   try {
     const { data } = await axiosInstance.get<{ message: userSearchDetails[] }>(`/search/${searchString}`);
-    return { result: data.message, reason: "" }
+    return { results: data.message }
   } catch (error) {
-    console.log("ERROR: ", error)
-    return { result: [], reason: "Something went wrong try again" }
+    const axiosError = error as AxiosError
+        const status = axiosError.response?.status
+        //console.error("failed to get user details:", status, axiosError.response?.data)
+        if (status === 404) {
+          return { results: [], error: "User not found!" }
+        }
+        return { results: [], error: axiosError.message ?? "An error occurred while try to get user." }
   }
 };

@@ -10,7 +10,7 @@ import { inputMode } from "@/constants/customInputModeTypes";
 import { emailRegex } from "@/constants/regexes";
 import { useAuthStore } from "@/utils/authStore";
 import { useLocalSearchParams } from "expo-router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Toast from "react-native-toast-message";
 
@@ -48,7 +48,7 @@ export default function SignupDetailsScreen() {
 
     if (!response.isSuccess) {
       let message = "🤔 Something went wrong, try again."
-      if (String(response.info).includes("UsernameExistsException")){
+      if (String(response.info).includes("UsernameExistsException")) {
         message = "😬 this email is already in use!"
       }
       setShowActivityIndicator(false)
@@ -83,13 +83,14 @@ export default function SignupDetailsScreen() {
     return emailRegex.test(userDetails.email) && userDetails.password.length >= 8
   }
 
-  useEffect(() => {
-    if (emailRegex.test(userDetails.email) || userDetails.email.length < 1) {
+  function handleEmailTextChange(e: string) {
+    setUserDetails({ ...userDetails, email: e })
+    if (emailRegex.test(e) || e.length < 1) {
       setEmailInfo({ infoTxt: "🔒 other users won't see this", inputMode: "normal" })
     } else {
       setEmailInfo({ infoTxt: "❗️ doesn't look right yet", inputMode: "warn" })
     }
-  }, [userDetails.email])
+  }
 
   return (
     <CustomKeyboardAvoidingView backgroundColor={Colors.light.vibrantBackground}>
@@ -97,7 +98,7 @@ export default function SignupDetailsScreen() {
       <Text style={styles.text}>Step 3 of 4</Text>
       <CustomScrollView>
         <Spacer />
-        <CustomInput keyboardType="email-address" value={userDetails.email} setValue={e => setUserDetails({ ...userDetails, email: e })} labelText="Email:" infoText={emailInfo.infoTxt} showInfoTextAlways inputMode={emailInfo.inputMode} forceLowercase />
+        <CustomInput keyboardType="email-address" value={userDetails.email} setValue={e => handleEmailTextChange(e)} labelText="Email:" infoText={emailInfo.infoTxt} showInfoTextAlways inputMode={emailInfo.inputMode} forceLowercase />
         <Spacer size="small" />
         <CustomInput value={userDetails.password} setValue={e => setUserDetails({ ...userDetails, password: e })} labelText="Password:" infoText={getPasswordInfo()} isPassword showInfoTextOnFocus inputMode={getPasswordInputMode()} />
         <Spacer />
